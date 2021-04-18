@@ -2,6 +2,11 @@
 
 My notes of the Udemy course 'Typescript: The Complete Developer's Guide'
 
+## Overview
+
+Chapters 1-8 are about the TypeScript language (syntax and features).
+Chapters 9-16 bring this into practice with bigger projects, focussing on design patterns.
+
 ## References
 
 ### APIs
@@ -37,3 +42,27 @@ You can combine `tsc` and `node` and execute TypeScript 'directly' in Node:
 ```
 $ ts-node index.ts
 ```
+
+## Section 2: Type System
+
+An overview of the [most common types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html) of values in JavaScript code.
+
+### Primitive Types
+
+-   string
+-   number
+-   boolean
+
+and
+
+-   symbol
+-   null
+-   void
+-   undefined
+
+### Object Types
+
+-   functions
+-   arrays
+-   objects
+-   classes
