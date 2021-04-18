@@ -49,6 +49,8 @@ An overview of the [most common types](https://www.typescriptlang.org/docs/handb
 
 ### Primitive Types
 
+JavaScript has [7 primitive data types](https://developer.mozilla.org/en-US/docs/Glossary/Primitive):
+
 -   string
 -   number
 -   boolean
@@ -62,7 +64,72 @@ and
 
 ### Object Types
 
+JavaScript [standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) can be categorized into
+
 -   functions
--   arrays
--   objects
--   classes
+    -   eval, isFinite, isNaN, parseFloat, parseInt, encodeURI, decodeURI, ..
+-   errors
+    -   Error, AggregateError, InternalError, SyntaxError, TypeError, URIError, ..
+-   numbers and dates
+    -   Number, BigInt, Math, Date
+-   indexed collections
+    -   Array, Int8Array, UInt8Array, Float32Array, ..
+-   keyed collections
+    -   Map, Set, WeakMap, WeakSet
+-   reflection
+    -   Reflect, Proxy
+-   internationalisation
+    -   Intl, Intl.DateTimeFormat, Intl.NumberFormat, Intl.Locale, ..
+-   structured data
+    -   ArrayBuffer, Atomics, DataView, JSON, ..
+-   etc.
+
+In addition you can define custom [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes), [functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions), objects, .. which are also all of object type.
+
+## Section 3: Type annotations & inference
+
+The following code is equivalent TypeScript code:
+
+```
+let apples: number = 5;
+let today: Date = new Date();
+let numbers: number[] = [1, 2, 3];
+class Car {}
+let car: Car = new Car();
+```
+
+and
+
+```
+let apples = 5;
+let today = new Date();
+let numbers = [1, 2, 3];
+class Car {}
+let car = new Car();
+```
+
+In all of the above examples, TypeScript can derive from the variable initialization what the type of its value is (type inference). We will rely on type inference as much as we can.
+
+### Type 'any'
+
+We use type annotations only when
+
+-   variable declaration and initialization are not on the same line
+-   types that can't be inferred
+-   a function returns any (e.g. `JSON.parse()`) and we need to clarify the value
+
+Examples with `JSON.parse`:
+
+```
+const coordinates: {x: number, y: number} = JSON.parse('{"x": 10, "y": 20}');
+```
+
+or
+
+```
+interface Coordinates {
+    x: number;
+    y: number;
+}
+const coordinates: Coordinates = JSON.parse('{"x": 10, "y": 20}');
+```
