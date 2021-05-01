@@ -90,7 +90,7 @@ In addition you can define custom [classes](https://developer.mozilla.org/en-US/
 
 The following code is equivalent TypeScript code:
 
-```
+```js
 let apples: number = 5;
 let today: Date = new Date();
 let numbers: number[] = [1, 2, 3];
@@ -100,7 +100,7 @@ let car: Car = new Car();
 
 and
 
-```
+```js
 let apples = 5;
 let today = new Date();
 let numbers = [1, 2, 3];
@@ -120,16 +120,149 @@ We use type annotations only when
 
 Examples with `JSON.parse`:
 
-```
-const coordinates: {x: number, y: number} = JSON.parse('{"x": 10, "y": 20}');
+```js
+const coordinates: { x: number, y: number } = JSON.parse('{"x": 10, "y": 20}');
 ```
 
 or
 
-```
+```js
 interface Coordinates {
     x: number;
     y: number;
 }
 const coordinates: Coordinates = JSON.parse('{"x": 10, "y": 20}');
 ```
+
+## Section 4: Type annotations with functions
+
+Function returning a `number`:
+
+```js
+function divide(a: number, b: number): number {
+    return a / b;
+}
+```
+
+Function that does not return anything:
+
+```js
+const logger = (message: string): void => {
+    console.log(message);
+};
+```
+
+Function that `never` reaches its end:
+
+```js
+const neverReturningFunction = (message: string): never => {
+    throw new Error(message);
+};
+```
+
+### Destructuring function annotations
+
+Consider an object like
+
+```js
+const todaysWeather = {
+    date: new Date(),
+    weather: 'sunny'
+};
+```
+
+and a function accepting such an object as argument:
+
+```js
+const logWeather_a = (forecast: { date: Date, weather: string }): void => {
+    console.log(forecast.date);
+    console.log(forecast.weather);
+};
+```
+
+The function argument can be destructured as follows:
+
+```js
+const logWeather_b = ({ date, weather }: { date: Date, weather: string }): void => {
+    console.log(date);
+    console.log(weather);
+};
+```
+
+## Section 5, 6: Arrays and Tuples
+
+### Arrays
+
+The inferred type of the following array is `string[]`:
+
+```js
+const fruits = ['apple', 'pear', 'peach'];
+```
+
+You can add only strings to this array. You will get a compile error if you try to push a number into the array.
+
+You can allow multiple types in an array:
+
+```js
+const dates: (Date | string)[] = [new Date(), '2021-05-01'];
+```
+
+### Tuples
+
+Unlike an array, a `tuple` describes one single record. Each property of the record can have a different type.
+
+As an object:
+
+```js
+{
+    color: 'brown',
+    carbonated: true,
+    sugar: 40
+}
+```
+
+As a tuple:
+
+```js
+const pepsi: [string, boolean, number] = ['brown', true, 40];
+```
+
+or
+
+```js
+type Drink = [string, boolean, number];
+const pepsi: Drink = ['brown', true, 40];
+const sprite: Drink = ['clear', true, 35];
+```
+
+The difference with multi-typed arrays is that in a tuple, each position has a fixed type.
+Tuples come in handy when working with CSV files (later on in this course).
+
+## Section 7: Interfaces
+
+```js
+interface Vehicle {
+    name: string;
+    year: number;
+    broken: boolean;
+    summary(): string;
+}
+
+const printVehicle = (vehicle: Vehicle): void => {
+    console.log(vehicle.summary());
+};
+
+const myCivic = {
+    name: 'civic',
+    year: 2002,
+    isBroken: true,
+    summary(): string {
+        return `Name: ${this.name}`;
+    }
+};
+
+// Compile error (broken <--> isBroken)
+printVehicle(myCivic);
+```
+
+The object `myCivic` can have more properties than the ones defined in the `Vechile` interface.
