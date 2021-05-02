@@ -1,19 +1,24 @@
 import faker from 'faker';
+import { Mappable } from './Mappable';
 
-export class Company {
+export class Company implements Mappable {
     name: string;
-    catchPhrase: string;
     location: {
         lat: number;
         lng: number;
     };
+    catchPhrase: string;
 
     constructor() {
         this.name = faker.company.companyName();
-        this.catchPhrase = faker.company.catchPhrase();
         this.location = {
             lat: parseFloat(faker.address.latitude()),
             lng: parseFloat(faker.address.longitude())
         };
+        this.catchPhrase = faker.company.catchPhrase();
+    }
+
+    infoHtml() {
+        return this.catchPhrase;
     }
 }
