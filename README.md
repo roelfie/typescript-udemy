@@ -266,3 +266,47 @@ printVehicle(myCivic);
 ```
 
 The object `myCivic` can have more properties than the ones defined in the `Vechile` interface.
+
+## Section 8: Classes
+
+We'll mainly discuss the differences sith Java here.
+
+### Default modifier is public
+
+Allowed method & modifiers in TypeScript are `public`, `private` and `protected`. The default modifier in TS is `public` (unlike Java).
+
+### Modifiers in constructors
+
+You can use modifiers for constructor arguments to avoid boiler plate code:
+
+```js
+class Vehicle {
+    constructor(public color: string) {}
+}
+```
+
+is equivalent to
+
+```js
+class Vehicle {
+    color: string;
+
+    constructor(color: string) {
+        this.color = color;
+    }
+}
+```
+
+### Inheritance of non-default constructor
+
+```js
+class Vehicle {
+    constructor(public color: string) {}
+}
+
+class Car extends Vehicle {}
+
+const car = new Car('red');
+```
+
+In Java you would have to explicitly define the non-default constructor in the sub class.
