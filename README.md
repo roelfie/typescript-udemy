@@ -310,3 +310,30 @@ const car = new Car('red');
 ```
 
 In Java you would have to explicitly define the non-default constructor in the sub class.
+
+## Section 9: Google Maps app
+
+[Parcel](https://parceljs.org/) is a web application bundler with features such as hot deploy.
+
+```
+npm install -g parcel-bundler
+```
+
+### Type Definition files
+
+When importing a JavaScript library into your \*.ts file you may see a message _'Could not find a declaration file form module ...'_.
+
+JavaScript code does not contain type information. We can use `type definition files` to provide the TypeScript compiler with type information for JavaScript libraries. Some libraries (like axios) include a type definition file. Others (like faker) don't.
+
+The [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project contains type definition files for thousands of JavaScript libraries.
+
+Naming conventions:
+
+-   type definition project: `@types/mylib`.
+-   type definition file: `index.d.ts`
+
+Example:
+
+```
+npm install faker @types/faker
+```
